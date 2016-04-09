@@ -5,25 +5,20 @@ import ReversiBoard, { W, B, InvalidMoveError } from '../src/ReversiBoard';
 // Set these consts for more visual clarity on placing test bord data
 const O = W, X = B, _ = null;
 
+// Rules form https://en.wikipedia.org/wiki/Reversi
 describe('ReversiBoard', () => {
-  // https://en.wikipedia.org/wiki/Reversi
   it("starts with starting position", () => {
     var board = new ReversiBoard();
-    for (var i=0; i<8; i++) {
-      for (var j=0; j<8; j++) {
-        if (i == 3 && j == 3) {
-          assert.equal(board.getPosition(i, j), W);
-        } else if (i == 4 && j == 3) {
-          assert.equal(board.getPosition(i, j), B);
-        } else if (i == 3 && j == 4) {
-          assert.equal(board.getPosition(i, j), B);
-        } else if (i == 4 && j == 4) {
-          assert.equal(board.getPosition(i, j), W);
-        } else {
-          assert.equal(board.getPosition(i, j), null);
-        }
-      }
-    }
+    assert.deepEqual(board.getBoardData(), [
+      _, _, _, _, _, _, _, _,
+      _, _, _, _, _, _, _, _,
+      _, _, _, _, _, _, _, _,
+      _, _, _, O, X, _, _, _,
+      _, _, _, X, O, _, _, _,
+      _, _, _, _, _, _, _, _,
+      _, _, _, _, _, _, _, _,
+      _, _, _, _, _, _, _, _,
+    ]);
   });
 
   it("starts with black's turn", () => {
@@ -89,7 +84,7 @@ describe('ReversiBoard', () => {
     });
   });
 
-  describe("flippedPositions()", () => {
+  describe("flippedPositionsFor()", () => {
     it("returns the flipped positions of a move as an array", () => {
       var board = new ReversiBoard();
       board.setBoardDataForTesting([
@@ -103,7 +98,7 @@ describe('ReversiBoard', () => {
         _, _, _, _, _, _, _, O,
       ]);
       board.setTurnForTesting(W);
-      assert.includeDeepMembers(board.flippedPositions(5, 1), [
+      assert.includeDeepMembers(board.flippedPositionsFor(5, 1), [
         [5, 2],
         [5, 3],
         [5, 4]
@@ -111,7 +106,7 @@ describe('ReversiBoard', () => {
     });
   });
 
-  describe("isPositionFlipped()", () => {
+  describe("willPositionFlip()", () => {
     it("returns true if the position will be flipped while a given position is placed", () => {
       var board = new ReversiBoard();
       board.setBoardDataForTesting([
@@ -125,14 +120,14 @@ describe('ReversiBoard', () => {
         _, _, _, _, _, _, _, O,
       ]);
       board.setTurnForTesting(W);
-      // isPositionFlipped: isPositionFlipped(isFlippedX, isFlippedY, ifPlaceX, ifPlaceY)
-      assert.isTrue(board.isPositionFlipped(5, 2, 5, 1));
-      assert.isTrue(board.isPositionFlipped(5, 3, 5, 1));
-      assert.isTrue(board.isPositionFlipped(5, 4, 5, 1));
-      assert.isNotTrue(board.isPositionFlipped(5, 5, 5, 1));
-      assert.isNotTrue(board.isPositionFlipped(5, 6, 5, 1));
-      assert.isNotTrue(board.isPositionFlipped(4, 3, 5, 1));
-      assert.isTrue(board.isPositionFlipped(4, 6, 3, 7));
+      // willPositionFlip: willPositionFlip(isFlippedX, isFlippedY, ifPlaceX, ifPlaceY)
+      assert.isTrue(board.willPositionFlip(5, 2, 5, 1));
+      assert.isTrue(board.willPositionFlip(5, 3, 5, 1));
+      assert.isTrue(board.willPositionFlip(5, 4, 5, 1));
+      assert.isNotTrue(board.willPositionFlip(5, 5, 5, 1));
+      assert.isNotTrue(board.willPositionFlip(5, 6, 5, 1));
+      assert.isNotTrue(board.willPositionFlip(4, 3, 5, 1));
+      assert.isTrue(board.willPositionFlip(4, 6, 3, 7));
     });
   });
 
