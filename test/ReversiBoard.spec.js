@@ -89,6 +89,75 @@ describe('ReversiBoard', () => {
     });
   });
 
+  describe("getValidPositions()", () => {
+    it("returns all the valid positions in an array", () => {
+      var board = new ReversiBoard();
+
+      board.setBoardDataForTesting([
+        _, _, _, _, _, _, _, _,
+        _, _, _, _, _, _, _, _,
+        _, _, _, _, _, X, _, _,
+        _, _, _, O, X, X, _, _,
+        _, _, _, O, X, X, _, _,
+        _, _, _, O, X, O, _, _,
+        _, _, _, _, X, _, O, _,
+        _, _, _, _, _, _, _, O,
+      ]);
+      board.setTurnForTesting(W);
+      assert.includeDeepMembers(board.getValidPositions(), [
+        [5, 1], [6, 1],
+        [6, 2],
+        [6, 3],
+        [6, 4],
+        [5, 6],
+        [3, 7], [5, 7]
+      ]);
+
+      board.setBoardDataForTesting([
+        _, _, _, _, _, _, _, _,
+        _, _, _, _, _, _, _, _,
+        _, _, _, _, _, X, _, _,
+        _, _, O, O, O, O, _, _,
+        _, _, _, X, O, X, _, _,
+        _, _, X, O, _, _, _, _,
+        _, _, _, _, _, _, _, _,
+        _, _, _, _, _, _, _, _,
+      ]);
+      board.setTurnForTesting(W);
+      assert.includeDeepMembers(board.getValidPositions(), [
+        [3, 2], [7, 2],
+        [7, 4],
+        [4, 5],
+        [3, 6]
+      ]);
+    });
+  });
+
+  describe("isValidPosition()", () => {
+    it("returns true if the positions is valid", () => {
+      board.setBoardDataForTesting([
+        _, _, _, _, _, _, _, _,
+        _, _, _, _, _, _, _, _,
+        _, _, _, _, _, X, _, _,
+        _, _, _, O, X, X, _, _,
+        _, _, _, O, X, X, _, _,
+        _, _, _, O, X, O, _, _,
+        _, _, _, _, X, _, O, _,
+        _, _, _, _, _, _, _, O,
+      ]);
+      board.setTurnForTesting(W);
+      assert.isTrue(board.isValidPosition(5, 1));
+      assert.isTrue(board.isValidPosition(6, 1));
+      assert.isTrue(board.isValidPosition(6, 2));
+      assert.isTrue(board.isValidPosition(6, 3));
+      assert.isTrue(board.isValidPosition(6, 4));
+      assert.isTrue(board.isValidPosition(5, 6));
+      assert.isTrue(board.isValidPosition(3, 7));
+      assert.isTrue(board.isValidPosition(5, 7));
+      assert.isNotTrue(board.isValidPosition(5, 2));
+    });
+  });
+
   describe("getScore()", () => {
     it("returns the current score", () => {
       var board = new ReversiBoard();
