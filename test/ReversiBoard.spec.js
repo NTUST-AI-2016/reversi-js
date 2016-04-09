@@ -1,4 +1,4 @@
-import assert from 'assert';
+import { assert } from 'chai';
 
 import ReversiBoard, { W, B, InvalidMoveError } from '../src/ReversiBoard';
 
@@ -120,7 +120,7 @@ describe('ReversiBoard', () => {
         _, _, _, _, _, _, _, O,
       ]);
       board.setTurnForTesting(W);
-      // willPositionFlip: willPositionFlip(isFlippedX, isFlippedY, ifPlaceX, ifPlaceY)
+      // Usage of willPositionFlip: willPositionFlip(isFlippedX, isFlippedY, ifPlaceX, ifPlaceY)
       assert.isTrue(board.willPositionFlip(5, 2, 5, 1));
       assert.isTrue(board.willPositionFlip(5, 3, 5, 1));
       assert.isTrue(board.willPositionFlip(5, 4, 5, 1));
@@ -146,6 +146,7 @@ describe('ReversiBoard', () => {
         _, _, _, _, _, _, _, O,
       ]);
       board.setTurnForTesting(W);
+      assert.equal(board.getValidPositions().length, 8);
       assert.includeDeepMembers(board.getValidPositions(), [
         [5, 1], [6, 1],
         [6, 2],
@@ -165,18 +166,19 @@ describe('ReversiBoard', () => {
         _, _, _, _, _, _, _, _,
         _, _, _, _, _, _, _, _,
       ]);
-      board.setTurnForTesting(W);
+      board.setTurnForTesting(B);
+      assert.equal(board.getValidPositions().length, 4);
       assert.includeDeepMembers(board.getValidPositions(), [
-        [3, 2], [7, 2],
-        [7, 4],
-        [4, 5],
-        [3, 6]
+        [ 1, 2 ], [ 3, 2 ],
+        [ 3, 6 ],
+        [ 4, 5 ]
       ]);
     });
   });
 
   describe("isValidPosition()", () => {
     it("returns true if the position is valid", () => {
+      var board = new ReversiBoard();
       board.setBoardDataForTesting([
         _, _, _, _, _, _, _, _,
         _, _, _, _, _, _, _, _,
@@ -234,7 +236,7 @@ describe('ReversiBoard', () => {
 
   describe("placePiece()", () => {
     context("black places a piece", () => {
-      it("flips pieces lying on a straight line between the new piece andany anchoring dark pieces", () => {
+      it("flips pieces lying on a straight line between the new piece and any anchoring dark pieces", () => {
         var board = new ReversiBoard();
         board.placePiece(B, 3, 2);
         assert.equal(board.getPosition(3, 2), B);
@@ -293,7 +295,7 @@ describe('ReversiBoard', () => {
 
         board.placePiece(W, 6, 3);
 
-        assert.equal(board.getBoardData(), [
+        assert.deepEqual(board.getBoardData(), [
           _, _, _, _, O, _, _, O,
           _, _, _, _, O, X, O, _,
           _, _, _, _, X, O, _, _,
@@ -319,7 +321,7 @@ describe('ReversiBoard', () => {
         ]);
         board.setTurnForTesting(W);
 
-        board.placePiece(W, 3, 3);
+        board.placePiece(W, 2, 2);
 
         assert.equal(board.getScore(W), 3);
         assert.equal(board.getScore(B), 3);
