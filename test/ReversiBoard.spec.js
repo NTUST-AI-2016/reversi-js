@@ -89,6 +89,53 @@ describe('ReversiBoard', () => {
     });
   });
 
+  describe("flippedPositions()", () => {
+    it("returns the flipped positions of a move as an array", () => {
+      var board = new ReversiBoard();
+      board.setBoardDataForTesting([
+        _, _, _, _, _, _, _, _,
+        _, _, _, _, _, _, _, _,
+        _, _, _, _, _, X, _, _,
+        _, _, _, O, X, X, _, _,
+        _, _, _, O, X, X, _, _,
+        _, _, _, O, X, O, _, _,
+        _, _, _, _, X, _, O, _,
+        _, _, _, _, _, _, _, O,
+      ]);
+      board.setTurnForTesting(W);
+      assert.includeDeepMembers(board.flippedPositions(5, 1), [
+        [5, 2],
+        [5, 3],
+        [5, 4]
+      ]);
+    });
+  });
+
+  describe("isPositionFlipped()", () => {
+    it("returns true if the position will be flipped while a given position is placed", () => {
+      var board = new ReversiBoard();
+      board.setBoardDataForTesting([
+        _, _, _, _, _, _, _, _,
+        _, _, _, _, _, _, _, _,
+        _, _, _, _, _, X, _, _,
+        _, _, _, O, X, X, _, _,
+        _, _, _, O, X, X, _, _,
+        _, _, _, O, X, O, _, _,
+        _, _, _, _, X, _, O, _,
+        _, _, _, _, _, _, _, O,
+      ]);
+      board.setTurnForTesting(W);
+      // isPositionFlipped: isPositionFlipped(isFlippedX, isFlippedY, ifPlaceX, ifPlaceY)
+      assert.isTrue(board.isPositionFlipped(5, 2, 5, 1));
+      assert.isTrue(board.isPositionFlipped(5, 3, 5, 1));
+      assert.isTrue(board.isPositionFlipped(5, 4, 5, 1));
+      assert.isNotTrue(board.isPositionFlipped(5, 5, 5, 1));
+      assert.isNotTrue(board.isPositionFlipped(5, 6, 5, 1));
+      assert.isNotTrue(board.isPositionFlipped(4, 3, 5, 1));
+      assert.isTrue(board.isPositionFlipped(4, 6, 3, 7));
+    });
+  });
+
   describe("getValidPositions()", () => {
     it("returns all the valid positions in an array", () => {
       var board = new ReversiBoard();
@@ -134,7 +181,7 @@ describe('ReversiBoard', () => {
   });
 
   describe("isValidPosition()", () => {
-    it("returns true if the positions is valid", () => {
+    it("returns true if the position is valid", () => {
       board.setBoardDataForTesting([
         _, _, _, _, _, _, _, _,
         _, _, _, _, _, _, _, _,
