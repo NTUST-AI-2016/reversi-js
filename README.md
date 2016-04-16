@@ -13,7 +13,7 @@ cd into the project directory and run:
 npm install
 ```
 
-## Sample gameplay
+## Sample gameplay(Command Line)
 
 ```
 ./node_modules/babel-cli/bin/babel-node.js test/human_game_starter.js
@@ -29,6 +29,15 @@ node node_modules\babel-cli\bin\babel-node.js test\haman_game_starter.js
 ![](http://i.imgur.com/BTjsQGi.png)
 
 And now is your turn. :p
+
+## Sample Gameplay(HTML Canvas)
+
+```
+brunch watch --server
+```
+
+then visit `http://localhost:3333` and start playing.
+![](http://i.imgur.com/XNgHgIF.png)
 
 ## Write an AI Plugin Example
 
