@@ -138,8 +138,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var chessB = new Image();
 var chessW = new Image();
 
-chessB.src = "/images/blackChess.png";
-chessW.src = "/images/whiteChess.png";
+chessB.src = "images/blackChess.png";
+chessW.src = "images/whiteChess.png";
 
 function initialize() {
   window.board = new _ReversiBoard2.default();

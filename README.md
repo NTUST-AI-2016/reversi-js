@@ -36,8 +36,10 @@ And now is your turn. :p
 brunch watch --server
 ```
 
-then visit `http://localhost:3333` and start playing.
 ![](http://i.imgur.com/XNgHgIF.png)
+
+then visit `http://localhost:3333` and start playing.
+
 
 ## Write an AI Plugin Example
 

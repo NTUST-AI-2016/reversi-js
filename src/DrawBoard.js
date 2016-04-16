@@ -4,8 +4,8 @@ import RandomPlay from './player/RandomPlay';
 var chessB = new Image();
 var chessW = new Image();
 
-chessB.src="/images/blackChess.png";
-chessW.src="/images/whiteChess.png";
+chessB.src="images/blackChess.png";
+chessW.src="images/whiteChess.png";
 
 export function initialize() {
   window.board = new ReversiBoard();
