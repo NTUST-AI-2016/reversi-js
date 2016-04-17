@@ -87,8 +87,12 @@ function gameOver() {
 }
 
 export function touchBoard(pos){
-  var x = parseInt(pos.clientX / 40);
-  var y = parseInt(pos.clientY / 40);
+  var result = getCursorPosition(pos);
+
+  var x = parseInt(result.x / 40);
+  var y = parseInt(result.y / 40);
+
+  console.log(x + ", " + y)
 
   if (window.board.isValidPosition(x, y)) {
     window.board.placePiece(window.board.getTurn(), x, y);
@@ -97,6 +101,14 @@ export function touchBoard(pos){
 
   checkMove();
   drawBoard();
+}
+
+function getCursorPosition(event) {
+    var canvas = window.document.getElementById("canvas");
+    var rect = canvas.getBoundingClientRect();
+    var x = event.clientX - rect.left;
+    var y = event.clientY - rect.top;
+    return {x, y};
 }
 
 export function drawChess(context, x, y, color){

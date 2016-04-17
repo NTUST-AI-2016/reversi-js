@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/stylesheets/style.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"public/app.css","sourcesContent":["body {\n  text-align: center;\n}\n\n#canvas {\n  margin: 0 auto;\n  display: block;\n}\n"]}
