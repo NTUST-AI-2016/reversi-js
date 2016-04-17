@@ -4,16 +4,27 @@ import RandomPlay from './player/RandomPlay';
 var chessB = new Image();
 var chessW = new Image();
 
+
 chessB.src="images/blackChess.png";
 chessW.src="images/whiteChess.png";
+
+var images = [chessB, chessW];
+var loadedCount = 0;
 
 export function initialize() {
   window.board = new ReversiBoard();
   window.playerBlack = new RandomPlay(B);
   window.playerWhite = null;
 
-  drawBoard();
-  checkMove();
+  for(var i = 0; i < 2; i++) {
+    images[i].onload = function() {
+      loadedCount++;
+      if (loadedCount == 2) {
+        drawBoard();
+        checkMove();
+      }
+    }
+  }
 }
 
 export function reset() {
