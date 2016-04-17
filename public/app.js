@@ -141,13 +141,23 @@ var chessW = new Image();
 chessB.src = "images/blackChess.png";
 chessW.src = "images/whiteChess.png";
 
+var images = [chessB, chessW];
+var loadedCount = 0;
+
 function initialize() {
   window.board = new _ReversiBoard2.default();
   window.playerBlack = new _RandomPlay2.default(_ReversiBoard.B);
   window.playerWhite = null;
 
-  drawBoard();
-  checkMove();
+  for (var i = 0; i < 2; i++) {
+    images[i].onload = function () {
+      loadedCount++;
+      if (loadedCount == 2) {
+        drawBoard();
+        checkMove();
+      }
+    };
+  }
 }
 
 function reset() {

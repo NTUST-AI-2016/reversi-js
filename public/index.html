@@ -4,23 +4,22 @@
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-  <title>Brunch with ES6</title>
+  <title>黑白棋 - NTUST AI Project</title>
   <script src="app.js"></script>
   <script src="vendor.js"></script>
 </head>
-<title>黑白棋</title>
 <body >
   <canvas width="320" height="320" id="canvas"></canvas>
 </body>
 <script type="text/javascript">
-  $(document).ready(function() {
+  window.onload = function() {
     window.drawBoard = require('src/DrawBoard.js');
     window.drawBoard.initialize();
 
     $('#canvas').on('mousedown', function(event) {
       window.drawBoard.touchBoard(event);
     })
-  });
+  }
 </script>
 </html>
 
