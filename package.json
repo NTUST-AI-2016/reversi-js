@@ -9,7 +9,7 @@
     "prod": "brunch build --production"
   },
   "directories": {
-    "lib": "src"
+    "lib": "./src"
   },
   "author": "",
   "license": "MIT",

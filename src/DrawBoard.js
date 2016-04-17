@@ -1,5 +1,5 @@
 import ReversiBoard, { W, B, InvalidMoveError} from './ReversiBoard';
-import RandomPlay from './player/RandomPlay';
+import RandomPlay from './player/RandomPlay.js';
 
 var chessB = new Image();
 var chessW = new Image();
@@ -20,8 +20,8 @@ export function initialize() {
     images[i].onload = function() {
       loadedCount++;
       if (loadedCount == 2) {
-        drawBoard();
         checkMove();
+        drawBoard();
       }
     }
   }
@@ -34,6 +34,9 @@ export function reset() {
 export function drawBoard(){
   var canvas = window.document.getElementById("canvas");
   var context = canvas.getContext("2d");
+
+  context.fillStyle = "#E4AC6A";
+  context.fillRect(0, 0, canvas.width, canvas.height);
 
   for(var count = 0; count <= 320; count += 40){
     context.beginPath();
@@ -89,10 +92,11 @@ export function touchBoard(pos){
 
   if (window.board.isValidPosition(x, y)) {
     window.board.placePiece(window.board.getTurn(), x, y);
-    drawBoard();
   }
+  drawBoard();
 
   checkMove();
+  drawBoard();
 }
 
 export function drawChess(context, x, y, color){
