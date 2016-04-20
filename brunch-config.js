@@ -6,7 +6,7 @@ module.exports = {
   files: {
     javascripts: {
       joinTo: {
-        'vendor.js': /^(?!app)/,
+        'vendor.js': /^(?!src)/,
         'app.js': /^src/
       }
     },
@@ -14,6 +14,7 @@ module.exports = {
   },
 
   npm: {
+    enable: true,
     globals: {
       $: 'jquery'
     }
