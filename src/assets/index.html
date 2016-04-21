@@ -1,0 +1,29 @@
+<!DOCTYPE html class="han-init">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+  <title>黑白棋 - NTUST AI Project</title>
+  <script src="app.js"></script>
+  <script src="vendor.js"></script>
+  <link rel="stylesheet" type="text/css" href="app.css">
+</head>
+<body>
+  <h2>Reversi Game - using HTML canvas</h2>
+  <div class="container-fulid">
+    <canvas width="320" height="320" id="canvas"></canvas>
+  </div>
+</body>
+<script type="text/javascript">
+  window.onload = function() {
+    window.drawBoard = require('src/DrawBoard.js');
+    window.drawBoard.initialize();
+
+    $('#canvas').on('mousedown', function(event) {
+      window.drawBoard.touchBoard(event);
+    })
+  }
+</script>
+</html>
+
