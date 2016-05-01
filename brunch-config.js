@@ -14,7 +14,7 @@ module.exports = {
   },
 
   npm: {
-    enable: true,
+    enabled: true,
     globals: {
       $: 'jquery'
     }

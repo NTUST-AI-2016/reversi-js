@@ -1,5 +1,5 @@
 import ReversiBoard, { W, B, InvalidMoveError} from './ReversiBoard';
-import RandomPlay from './player/RandomPlay.js';
+import {MctsPlayer, RandomPlay} from './player';
 
 var chessB = new Image();
 var chessW = new Image();
@@ -13,7 +13,7 @@ var loadedCount = 0;
 
 export function initialize() {
   window.board = new ReversiBoard();
-  window.playerBlack = new RandomPlay(B);
+  window.playerBlack = new MctsPlayer(B);
   window.playerWhite = null;
 
   for(var i = 0; i < 2; i++) {
@@ -66,15 +66,18 @@ export function drawBoard(){
 
 export function checkMove() {
   var turn = window.board.getTurn();
+  console.log("checkMove");
 
-  if (turn == W) {
-    if (playerWhite != null) {
-      window.playerWhite.move(window.board);
+  if (turn == B) {
+    if (playerBlack != null) {
+      var position = window.playerBlack.getMove(window.board);
+      window.board.placePiece(B, position[0], position[1]);
     }
   }
-  else if (turn == B) {
-    if (playerBlack != null) {
-      window.playerBlack.move(window.board);
+  else if (turn == W) {
+    if (playerWhite != null) {
+      var position = window.playerWhite.getMove(window.board);
+      window.board.placePiece(W, position[0], position[1]);
     }
   } else {
     gameOver();

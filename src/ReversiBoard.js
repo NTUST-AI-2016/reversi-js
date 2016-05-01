@@ -181,6 +181,7 @@ export default class ReversiBoard {
     }
 
     this._clearCache();
+    return this;
   }
 
   setBoardDataForTesting(boardData) {
@@ -191,6 +192,37 @@ export default class ReversiBoard {
   setTurnForTesting(turn) {
     this._turn = turn;
     this._clearCache();
+  }
+
+  setBoardData(boardData, turn) {
+    this._boardData = boardData;
+    this._turn = turn;
+    this._clearCache();
+    return this;
+  }
+
+  getWinner() {
+    var blackCounts = this.getScore(B);
+    var whiteCounts = this.getScore(W);
+
+    if (this.isFull()) {
+      return blackCounts > whiteCounts ? B : W; // tie goes to white
+    }
+
+    var blackValidMoves = (new ReversiBoard()).setBoardData(this._boardData, B);
+    if (blackValidMoves.length > 0) return false;
+
+    var whiteValidMoves = (new ReversiBoard()).setBoardData(this._boardData, W);
+    if (whiteValidMoves.length > 0) return false;
+
+    return blackCounts > whiteCounts ? B : W; // tie goes to white
+  }
+
+  isFull() {
+    for (let i = 0; i < this._boardData.length; i++) {
+      if (this._boardData[i] == null) return false;
+    }
+    return true;
   }
 
   _clearCache() {

@@ -13,21 +13,6 @@ cd into the project directory and run:
 npm install
 ```
 
-### brunch 2.6.6 issue workaround
-
-It seems that brunch as dependency resolving issue in version 2.6.6.
-
-We need to apply these two fixes.
-
-* https://github.com/brunch/brunch/pull/1305/files
-* https://github.com/brunch/deppack/pull/20/files
-
-1. in `node_modules/brunch/lib/fs_utils/source_file.js`, change line 109 `path` to `normalizedPath`
-
-2. in `node_modules/deppack/lib/explore.js`, change line 48-49 to `deps = allDeps;`
-
-![](http://i.imgur.com/7cE0fz1.png)
-
 ## Sample gameplay(Command Line)
 
 ```
