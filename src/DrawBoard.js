@@ -20,8 +20,12 @@ export function initialize() {
     images[i].onload = function() {
       loadedCount++;
       if (loadedCount == 2) {
-        checkMove();
         drawBoard();
+
+        setTimeout(function() {
+          checkMove();
+          drawBoard();
+        }, 1);
       }
     }
   }
@@ -102,8 +106,10 @@ export function touchBoard(pos){
   }
   drawBoard();
 
-  checkMove();
-  drawBoard();
+  setTimeout(function() {
+    checkMove();
+    drawBoard();
+  }, 1);
 }
 
 function getCursorPosition(event) {
