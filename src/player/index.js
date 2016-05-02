@@ -1,7 +1,7 @@
 import RandomPlay from './RandomPlay';
-import HumanPlay from './HumanPlay';
+import MctsPlayer from './MctsPlayer';
 
 module.exports = {
   RandomPlay,
-  HumanPlay
+  MctsPlayer
 }
